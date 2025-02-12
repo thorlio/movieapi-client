@@ -19908,10 +19908,10 @@ const LoginView = ({ onLoggedIn })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            username: username,
+            password: password
         };
-        fetch("YOUR_API_URL/login", {
+        fetch("https://ohmyflix-1cea4b4ad120.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -20018,7 +20018,7 @@ const SignupView = ()=>{
             Email: email,
             Birthday: birthday
         };
-        fetch("SIGNUP_URL", {
+        fetch("https://ohmyflix-1cea4b4ad120.herokuapp.com/register", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

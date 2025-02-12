@@ -8,11 +8,11 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password,
+      username: username,
+      password: password,
     };
 
-    fetch("YOUR_API_URL/login", {
+    fetch("https://ohmyflix-1cea4b4ad120.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
