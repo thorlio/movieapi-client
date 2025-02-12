@@ -4,45 +4,13 @@ export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   const data = {
-  //     Username: username,
-  //     Password: password,
-  //   };
-
-  //   fetch("https://ohmyflix-1cea4b4ad120.herokuapp.com/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("Login response: ", data);
-  //       if (data.user) {
-  //         onLoggedIn(data.user, data.token);
-  //       } else {
-  //         alert("No such user");
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       alert("Something went wrong");
-  //     });
-  // };
-
-  //test code for debugging
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = {
-      Username: username, // ✅ Capitalized to match backend
+      Username: username,
       Password: password,
     };
-
-    console.log("🔍 Sending login data:", data); // 🛠 Debugging step
 
     fetch("https://ohmyflix-1cea4b4ad120.herokuapp.com/login", {
       method: "POST",
@@ -51,24 +19,16 @@ export const LoginView = ({ onLoggedIn }) => {
       },
       body: JSON.stringify(data),
     })
-      .then(async (response) => {
-        const responseData = await response.json();
-        console.log("🔍 Login response:", responseData); // 🔍 See what the backend sends
-
-        if (!response.ok) {
-          console.error("❌ Error:", responseData);
-          alert(responseData.error || "Something went wrong");
-          return;
-        }
-
-        if (responseData.user) {
-          onLoggedIn(responseData.user, responseData.token);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Login response: ", data);
+        if (data.user) {
+          onLoggedIn(data.user, data.token);
         } else {
           alert("No such user");
         }
       })
       .catch((e) => {
-        console.error("❌ Fetch error:", e);
         alert("Something went wrong");
       });
   };

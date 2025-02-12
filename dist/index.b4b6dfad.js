@@ -19908,8 +19908,8 @@ const LoginView = ({ onLoggedIn })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            username: username,
-            password: password
+            Username: username,
+            Password: password
         };
         fetch("https://ohmyflix-1cea4b4ad120.herokuapp.com/login", {
             method: "POST",
