@@ -8,8 +8,8 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      username: username,
-      password: password,
+      Username: username,
+      Password: password,
     };
 
     fetch("https://ohmyflix-1cea4b4ad120.herokuapp.com/login", {
