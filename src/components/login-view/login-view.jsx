@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -23,6 +25,8 @@ export const LoginView = ({ onLoggedIn }) => {
       .then((data) => {
         console.log("Login response: ", data);
         if (data.user) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
         } else {
           alert("No such user");
@@ -33,27 +37,55 @@ export const LoginView = ({ onLoggedIn }) => {
       });
   };
 
+  //   return (
+  //     <form onSubmit={handleSubmit}>
+  //       <label>
+  //         Username:
+  //         <input
+  //           type="text"
+  //           value={username}
+  //           onChange={(e) => setUsername(e.target.value)}
+  //           required
+  //         />
+  //       </label>
+  //       <label>
+  //         Password:
+  //         <input
+  //           type="password"
+  //           value={password}
+  //           onChange={(e) => setPassword(e.target.value)}
+  //           required
+  //         />
+  //       </label>
+  //       <button type="submit">Submit</button>
+  //     </form>
+  //   );
+  // };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          minLength="3"
         />
-      </label>
-      <label>
-        Password:
-        <input
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 };
