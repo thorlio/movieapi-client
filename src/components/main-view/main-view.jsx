@@ -1,10 +1,11 @@
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import { useState, useEffect } from "react";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+// import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -42,7 +43,7 @@ export const MainView = () => {
           genre: movie.genre,
           description: movie.description,
           dateReleased: movie.dateReleased,
-          imagePath: movie.imagePath || "https://via.placeholder.com/300", // ✅ Ensure consistency
+          imagePath: movie.imagePath || "https://via.placeholder.com/300",
         }));
 
         setMovies(moviesWithImages);
@@ -53,7 +54,7 @@ export const MainView = () => {
   return (
     <Row className="justify-content-md-center">
       {!user ? (
-        <Col md={5}>
+        <Col xs={12} sm={6} md={3} className="text-center">
           <LoginView
             onLoggedIn={(user, token) => {
               setUser(user);
@@ -67,7 +68,7 @@ export const MainView = () => {
         </Col>
       ) : selectedMovie ? (
         <Row className="justify-content-md-center">
-          <Col md={8} style={{ border: "1px solid blue" }}>
+          <Col xs={12} sm={8} md={5} style={{ border: "1px solid blue" }}>
             <MovieView
               style={{ border: "1px solid green" }}
               movie={selectedMovie}
@@ -93,7 +94,7 @@ export const MainView = () => {
           </div>
 
           {movies.map((movie) => (
-            <Col className="mb-5" key={movie.id} md={3}>
+            <Col className="mb-5" key={movie.id} xs={12} sm={6} md={4} lg={3}>
               <MovieCard
                 movie={movie}
                 onMovieClick={(newSelectedMovie) => {
