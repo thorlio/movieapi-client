@@ -96,14 +96,10 @@ export const ProfileView = ({
 
     const token = localStorage.getItem("token");
 
-    console.log("Token:", token);
-
     if (!token) {
       alert("You must be logged in to delete your account.");
       return;
     }
-
-    console.log("Attempting to delete user:", user.Username);
 
     try {
       const response = await fetch(
