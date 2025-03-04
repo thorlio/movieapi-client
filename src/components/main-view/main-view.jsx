@@ -16,6 +16,7 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(storedUser || null);
   const [token, setToken] = useState(storedToken || null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (!token) return;
@@ -44,6 +45,14 @@ export const MainView = () => {
     setToken(null);
     localStorage.clear();
   };
+
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <BrowserRouter>
@@ -124,17 +133,26 @@ export const MainView = () => {
             path="/"
             element={
               user ? (
-                movies.length > 0 ? (
-                  <>
-                    {movies.map((movie) => (
-                      <Col className="mb-4" key={movie._id} md={3}>
+                <>
+                  <Col md={12}>
+                    <input
+                      type="text"
+                      placeholder="Search movies..."
+                      value={searchQuery}
+                      onChange={handleSearch}
+                    />
+                  </Col>
+
+                  {filteredMovies.length > 0 ? (
+                    filteredMovies.map((movie) => (
+                      <Col key={movie._id} md={3}>
                         <MovieCard movie={movie} />
                       </Col>
-                    ))}
-                  </>
-                ) : (
-                  <Col>The list is empty!</Col>
-                )
+                    ))
+                  ) : (
+                    <Col>No movies found</Col>
+                  )}
+                </>
               ) : (
                 <Navigate to="/login" replace />
               )
