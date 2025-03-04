@@ -1,54 +1,3 @@
-// import { useParams } from "react-router-dom";
-// import { Link } from "react-router-dom";
-// import "./movie-view.scss";
-
-// export const MovieView = ({ movies }) => {
-//   const { movieId } = useParams();
-
-//   if (!movies || movies.length === 0) {
-//     return <div>Loading</div>;
-//   }
-//   const movie = movies.find((m) => m._id === decodeURIComponent(movieId));
-
-//   if (!movie) {
-//     return <div>Movie not found</div>;
-//   }
-
-//   return (
-//     <div>
-//       <Link to={`/`}>
-//         <button className="back-button">Back</button>
-//       </Link>
-//       <div>
-//         <img className="w-100" src={movie.imagePath} />
-//       </div>
-//       <div>
-//         <span>Title: </span>
-//         <span>{movie.title}</span>
-//       </div>
-//       <div>
-//         <span>Director: </span>
-//         <span>{movie.director}</span>
-//       </div>
-//       <div>
-//         <span>Genre: </span>
-//         <span>{movie.genre}</span>
-//       </div>
-//       <div>
-//         <span>Description: </span>
-//         <span>{movie.description}</span>
-//       </div>
-//       <div>
-//         <span>Date Released: </span>
-//         <span>{movie.dateReleased}</span>
-//       </div>
-//       <Link to={`/`}>
-//         <button className="back-button">Back</button>
-//       </Link>
-//     </div>
-//   );
-// };
-
 import { useParams, Link } from "react-router-dom";
 import "./movie-view.scss";
 
@@ -86,13 +35,13 @@ export const MovieView = ({ movies, user, updateUser }) => {
   };
 
   return (
-    <div>
+    <div className="container text-center">
       <Link to="/">
         <button className="back-button">Back</button>
       </Link>
 
       <div>
-        <img className="w-100" src={movie.imagePath} alt={movie.title} />
+        <img className="w-50" src={movie.imagePath} alt={movie.title} />
       </div>
       <div>
         <strong>Title:</strong> {movie.title}
